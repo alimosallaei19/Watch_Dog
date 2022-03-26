@@ -40,13 +40,13 @@ app.post('/api', async (req, res) => {
 });
 
 // listen on port 3000
-app.listen(3000, () => console.log('listening on port 3000'));
+app.listen(process.env.PORT, () => console.log('Watch_Dog started on port ' + process.env.PORT));
 
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
 
 client.once('ready', async () => {
-	console.log('Ready!');
+	console.log('Watch_Dog is connected to Discord.');
 
 	client.user.setPresence({
 		status: "idle",
