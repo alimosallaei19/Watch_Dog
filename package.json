@@ -25,5 +25,9 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "fs": "^0.0.1-security"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "node": "^16.14.1"
   }
 }

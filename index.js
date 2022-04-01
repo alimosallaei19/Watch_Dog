@@ -25,14 +25,14 @@ app.use(cors());
 
 app.post('/api', async (req, res) => {
 	try {
-		await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get(process.env.EU_CHANNEL_ID).send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm A")}] The endpoint "${req.body.api}" was called.\n\`\`\``);
+		await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get(process.env.EU_CHANNEL_ID).send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm:ss A")}] The endpoint "${req.body.api}" was called.\n\`\`\``);
 		let command = await require(`./api/${req.body.api}.js`).run(req, res, client, dayjs)
 		if(!res.headersSent) {
 			res.status(401).json({ status: false, error: 'The endpoint executed, but nothing was returned.' })
 		}
 	} catch (err) {
 		if (err.code === 'MODULE_NOT_FOUND') {
-			await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get("956698926092779550").send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm A")}] [ERR] An invalid API endpoint was tried.\n\`\`\``);
+			await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get("956698926092779550").send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm:ss A")}] [ERR] An invalid API endpoint was tried.\n\`\`\``);
 
 			res.status(404).json({ status: false, message: 'Invalid API endpoint.' });
 		}
@@ -40,7 +40,7 @@ app.post('/api', async (req, res) => {
 });
 
 // listen on port 3000
-app.listen(process.env.PORT, () => console.log('Watch_Dog started on port ' + process.env.PORT));
+app.listen(3000, () => console.log('Watch_Dog started on port ' ));
 
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -57,7 +57,7 @@ client.once('ready', async () => {
 		]
 	})
 
-	await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get("956698926092779550").send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm A")}] Bot is online!\n\`\`\``);
+	await client.guilds.cache.get(process.env.SERVER_ID).channels.cache.get("956698926092779550").send(`\`\`\`ini\n[${dayjs().format("MM/DD/YY [at] hh:mm:ss A")}] Bot is online!\n\`\`\``);
 });
 
 client.login(process.env.BOT_TOKEN);
